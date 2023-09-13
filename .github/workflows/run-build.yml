@@ -1,0 +1,38 @@
+name: run-build
+
+# builds from source and then runs the fresh build
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  run-build:
+    if: github.repository == 'KamaranL/smart-mirror'
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: build
+        run: npm install && npm run all
+
+      - name: push to azure
+        if: ${{ always() }}
+        uses: ./
+        with:
+          owner: kamaranl
+          project: public
+          repository: smart-mirror
+        env:
+          TOKEN_AZURE: ${{ secrets.AZURE_MIRROR2024 }}

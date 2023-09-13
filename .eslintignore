@@ -1,0 +1,7 @@
+dist/
+lib/
+node_modules/
+jest.config.js
+__tests__/
+__mocks__/
+**/*.exclude.ts

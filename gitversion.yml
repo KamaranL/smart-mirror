@@ -1,0 +1,34 @@
+mode: Mainline
+tag-prefix: v
+continuous-delivery-fallback-tag: ''
+commit-message-incrementing: MergeMessageOnly
+next-version: 1.0.0
+branches:
+  main:
+    tag: rc
+    source-branches: []
+    is-release-branch: true
+  develop:
+    tag: beta
+    source-branches: [ main ]
+    increment: Patch
+  feature:
+    tag: alpha
+    regex: ^f(eat)?(ure)?[\/-]
+    source-branches: [ main, develop ]
+  hotfix:
+    regex: ^i(ss)?(ue)?[\/-]
+    source-branches: [ main, develop ]
+# [not used]
+  release:
+    regex: (?!)
+    source-branches: []
+    is-source-branch-for: []
+  support:
+    regex: (?!)
+    source-branches: []
+    is-source-branch-for: []
+  pull-request:
+    regex: (?!)
+    source-branches: []
+    is-source-branch-for: []

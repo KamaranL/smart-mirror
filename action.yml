@@ -1,0 +1,32 @@
+name: Smart Mirror - GitHub Action
+description: Mirrors your GitHub repository to another supported Git repository
+author: Kamaran Layne
+branding:
+  icon: arrow-up-circle
+  color: blue
+runs:
+  using: node16
+  main: dist/index.js
+
+inputs:
+  owner:
+    description: Specifies the owner of the mirror
+    required: false
+
+  repository:
+    description: Specifies the repository name of the mirror
+    required: false
+
+  project:
+    description: Specifies the project name of the mirror
+    required: false
+
+  createMirror:
+    description: Specifies if the mirror (external repository) should be created, if it does not already exist
+    required: false
+
+  visibility:
+    description: Specifies the mirror's visbility if creating a mirror
+    required: false
+    
+

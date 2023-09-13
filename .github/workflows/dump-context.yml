@@ -1,0 +1,44 @@
+name: dump-context
+
+# dumps all github contexts from payload event trigger
+
+on: workflow_dispatch
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  contexts:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo $GITHUB_CONTEXT
+          printf '%.0s-' {1..79};echo
+          echo $ENV_CONTEXT
+          printf '%.0s-' {1..79};echo
+          echo $VARS_CONTEXT
+          printf '%.0s-' {1..79};echo
+          echo $JOB_CONTEXT
+          printf '%.0s-' {1..79};echo
+          echo $STEPS_CONTEXT
+          printf '%.0s-' {1..79};echo
+          echo $RUNNER_CONTEXT
+          printf '%.0s-' {1..79};echo
+          echo $SECRETS_CONTEXT
+          printf '%.0s-' {1..79};echo
+          echo $NEEDS_CONTEXT
+          printf '%.0s-' {1..79};echo
+          echo $INPUTS_CONTEXT
+          printf '%.0s-' {1..79};echo
+          node -e "console.log(process.env);"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          ENV_CONTEXT: ${{ toJson(env) }}
+          VARS_CONTEXT: ${{ toJson(vars) }}
+          JOB_CONTEXT: ${{ toJson(job) }}
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+          NEEDS_CONTEXT: ${{ toJson(needs) }}
+          INPUTS_CONTEXT: ${{ toJson(inputs) }}
